@@ -24,7 +24,7 @@ function Timers() {
   let interval = useRef();
 
   const startTimer = () => {
-    const countdownDate = new Date("March 11, 2023 19:30:00").getTime();
+    const countdownDate = new Date("March 28, 2024 10:30:00").getTime();
 
     interval = setInterval(() => {
       const now = new Date().getTime();
@@ -62,9 +62,9 @@ function Timers() {
       clearInterval(intervalId);
     };
 
-    // return () => {
-    //     clearInterval(interval.current);
-    // }
+    return () => {
+      clearInterval(interval.current);
+    };
   });
 
   const isLargeScreen = useMediaQuery(theme => theme.breakpoints.up("lg"));
@@ -81,9 +81,10 @@ function Timers() {
         "@media (min-width: 960px)": {
           width: "75%"
         }
-      }}>
+      }}
+    >
       <h2 style={{ color: "#F2AA4CFF", fontFamily: "'Gruppo', cursive" }}>
-        STARTS IN
+        ROUND-2 STARTS IN
       </h2>
 
       <Grid container justifyContent={"space-evenly"}>
@@ -93,7 +94,8 @@ function Timers() {
             sx={{
               backgroundColor: "#101820FF",
               border: "1px solid #F2AA4CFF"
-            }}>
+            }}
+          >
             <h1>{daysLeft}</h1>
             <h4 style={{ fontFamily: "'Gruppo', cursive" }}>DAYS</h4>
           </Item>
@@ -105,7 +107,8 @@ function Timers() {
             sx={{
               backgroundColor: "#101820FF",
               border: "1px solid #F2AA4CFF"
-            }}>
+            }}
+          >
             <h1>{hoursLeft}</h1>
             <h4 style={{ fontFamily: "'Gruppo', cursive" }}>HOURS</h4>
           </Item>
@@ -117,7 +120,8 @@ function Timers() {
             sx={{
               backgroundColor: "#101820FF",
               border: "1px solid #F2AA4CFF"
-            }}>
+            }}
+          >
             <h1>{minutesLeft}</h1>
             <h4 style={{ fontFamily: "'Gruppo', cursive" }}>MINUTES</h4>
           </Item>
@@ -129,7 +133,8 @@ function Timers() {
             sx={{
               backgroundColor: "#101820FF",
               border: "1px solid #F2AA4CFF"
-            }}>
+            }}
+          >
             <h1>{secondsLeft}</h1>
             <h4 style={{ fontFamily: "'Gruppo', cursive" }}>SECONDS</h4>
           </Item>

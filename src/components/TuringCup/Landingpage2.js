@@ -6,17 +6,19 @@ import { atcb_action } from "add-to-calendar-button";
 
 import React from "react";
 import "./LandingPage2.css";
+import TuringCupSponsors from "./TuringCupSponsors";
 function Landingpage2() {
+  // console.log("PROCESS>ENV  : ", process.env.API_KEY)
+
   const config = {
-    name: "[Reminder] Turing Cup 2K23 Round - 1",
+    name: "[Reminder] Turing Cup 2K24 Round - 1",
     description: "Check your mail for the Contest Links",
-    startDate: "2023-03-11",
-    startTime: "19:30",
-    endTime: "22:00",
+    startDate: "2024-03-09",
+    startTime: "18:00",
+    endTime: "20:00",
     options: ["Google", "Apple", "Outlook.com"],
     timeZone: "Asia/Calcutta"
   };
-
   const handleClick = () => {
     atcb_action(config, document.getElementById("add-to-calendar-btn"));
   };
@@ -24,14 +26,16 @@ function Landingpage2() {
   return (
     <Grid
       className="fullpage"
-      style={{ fontFamily: "'Gruppo', cursive", marginBottom: "16px" }}>
+      style={{ fontFamily: "'Gruppo', cursive", marginBottom: "16px" }}
+    >
       <svg viewBox="0 0 1300 300">
         <text
           x="50%"
           y="70%"
           fill="transparent"
           textAnchor="middle"
-          className="bigh">
+          className="bigh"
+        >
           TURING CUP
         </text>
       </svg>
@@ -41,7 +45,8 @@ function Landingpage2() {
           y="26%"
           fill="transparent"
           textAnchor="middle"
-          className="smallh">
+          className="smallh"
+        >
           ONE TEAM , ONE DREAM!
         </text>
       </svg>
@@ -51,8 +56,9 @@ function Landingpage2() {
         style={{ marginTop: "-40px" }}
         sx={{ p: 5, justifyContent: "center" }}
         direction={{ xs: "column", md: "row" }}
-        spacing={2}>
-        <Button
+        spacing={2}
+      >
+        {/* <Button
           sx={{
             fontFamily: ['"Gruppo"', "cursive"].join(","),
             backgroundColor: "#101820FF",
@@ -64,13 +70,14 @@ function Landingpage2() {
             }
           }}
           variant="contained"
-          href="https://unstop.com/o/ue5gaLR?lb=Wqrocjv"
+          href="https://unstop.com/p/turing-cup-2k24-vallurupalli-nageswara-rao-vignana-jyothi-institute-of-engineering-technology-telangana-898184"
           target="__blank"
-          startIcon={<HowToRegRoundedIcon />}>
-          Register Now
-        </Button>
+          startIcon={<HowToRegRoundedIcon />}
+        >
+          Register For Round-2
+        </Button> */}
 
-        <Button
+        {/* <Button
           sx={{
             fontFamily: ['"Gruppo"', "cursive"].join(","),
             backgroundColor: "#101820FF",
@@ -79,14 +86,15 @@ function Landingpage2() {
             "&:hover": {
               backgroundColor: "#F2AA4CFF",
               color: "#fff"
-            }
+            } 
           }}
           id="add-to-calendar-btn"
           onClick={handleClick}
           variant="contained"
-          endIcon={<InsertInvitationRoundedIcon />}>
+          endIcon={<InsertInvitationRoundedIcon />}
+        >
           Add to Calendar
-        </Button>
+        </Button>  */}
       </Stack>
     </Grid>
   );

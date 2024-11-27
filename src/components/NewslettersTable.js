@@ -25,7 +25,7 @@ export default function NewslettersTable() {
   const [search, setSearch] = useState("");
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("Date");
-  const header = ["Name", "Date", "Type", "Status"];
+  const header = ["Name", "Date"];
   const data = useStaticQuery(graphql`
     query newsletters {
       allMarkdownRemark {
@@ -43,30 +43,24 @@ export default function NewslettersTable() {
     }
   `);
 
-  const newsletters = data.allMarkdownRemark.nodes.map(newsletter => {
-    const givendate = new Date(newsletter.frontmatter.date);
-    const today = new Date();
-    const options = { year: "numeric", month: "short", day: "numeric" };
+  const newsletters = data.allMarkdownRemark.nodes
+    .map(newsletter => {
+      const givendate = new Date(newsletter.frontmatter.date);
+      const today = new Date();
+      const options = { year: "numeric", month: "short", day: "numeric" };
 
-    return {
-      id: newsletter.id,
-      name: newsletter.frontmatter.title,
-      date: new Date(newsletter.frontmatter.date).toLocaleDateString(
-        "en-US",
-        options
-      ),
-      type: newsletter.frontmatter.type,
-      status:
-        givendate === newsletter.today
-          ? "Today"
-          : today > givendate
-          ? "Past newsletter"
-          : "Upcoming newsletter",
-      slug: newsletter.frontmatter.slug,
-      markdown_type: newsletter.frontmatter.markdownType
-
-    };
-  }).filter(newsletter=>newsletter.markdown_type==='newsletter');
+      return {
+        id: newsletter.id,
+        name: newsletter.frontmatter.title,
+        date: new Date(newsletter.frontmatter.date).toLocaleDateString(
+          "en-US",
+          options
+        ),
+        slug: newsletter.frontmatter.slug,
+        markdown_type: newsletter.frontmatter.markdownType
+      };
+    })
+    .filter(newsletter => newsletter.markdown_type === "newsletter");
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - newsletters.length) : 0;
@@ -110,8 +104,8 @@ export default function NewslettersTable() {
         sx={{ pb: 2 }}
         justifyContent={"space-between"}
       >
-        <Typography variant="h6" color="primary">
-          Directory of newsletters
+        <Typography variant="h6" color="primary" align="center">
+          Directory of Newsletters
         </Typography>
         <TextField
           id="standard-search"
@@ -122,15 +116,13 @@ export default function NewslettersTable() {
         />
       </Box>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 300 }} aria-label="newsletter table">
+        <Table sx={{ minWidth: 200 }} aria-label="newsletter table">
           <TableHead>
             <TableRow>
               {header.map((val, i) => (
                 <TableCell
                   key={i}
-                  align={
-                    ["Date", "Type", "Status"].includes(val) ? "right" : "left"
-                  }
+                  align={["Name", "Date"].includes("Name") ? "center" : "right"}
                   onClick={createSortHandler(val)}
                   sortDirection={orderBy === val ? order : false}
                 >
@@ -149,7 +141,7 @@ export default function NewslettersTable() {
                   </TableSortLabel>
                 </TableCell>
               ))}
-              <TableCell align="right">See More</TableCell>
+              <TableCell align="center">See More</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -168,27 +160,15 @@ export default function NewslettersTable() {
                       "&:last-child td, &:last-child th": { border: 0 }
                     }}
                   >
-                    <TableCell component="th" scope="row">
+                    <TableCell component="th" scope="row" align="center">
                       {newsletter.name}
                     </TableCell>
-                    <TableCell align="right">{newsletter.date}</TableCell>
-                    <TableCell align="right">{newsletter.type}</TableCell>
-                    <TableCell align="right">
-                      <Typography
-                        variant="body2"
-                        color={
-                          newsletter.status === "Today"
-                            ? blue[500]
-                            : newsletter.status.includes("Past")
-                            ? "error"
-                            : green["A700"]
-                        }
-                      >
-                        {newsletter.status}
-                      </Typography>
-                    </TableCell>
-                    <TableCell align="right">
-                      <Link to={`/newsletters/${newsletter.slug}`}>See more</Link>
+                    <TableCell align="center">{newsletter.date}</TableCell>
+
+                    <TableCell align="center">
+                      <Link to={`/newsletters/${newsletter.slug}`}>
+                        See more
+                      </Link>
                     </TableCell>
                   </TableRow>
                 )
